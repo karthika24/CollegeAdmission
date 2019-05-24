@@ -1,0 +1,223 @@
+create table course
+(
+course_id number(10) constraint course_id_pk primary key,
+name varchar2(50) not null,
+stream_id number(5) not null
+);
+--------
+create sequence course_id_seq 
+start with 1
+increment by 1;
+-----------
+insert into course(course_id,name,stream_id)
+values(course_id_seq.nextval,'B.E',101);
+insert into course(course_id,name,stream_id)
+values(course_id_seq.nextval,'B.Tech',101);
+insert into course(course_id,name,stream_id)
+values(course_id_seq.nextval,'B.Sc',102);
+insert into course(course_id,name,stream_id)
+values(course_id_seq.nextval,'B.A',102);
+---------------
+create table branch
+(
+branch_id number(10) constraint branch_id_pk primary key,
+name varchar2(70) not null,
+course_id number(10) constraint course_id_fk references course(course_id),
+hod_name varchar2(50) not null,
+);
+-------------
+create sequence branch_id_seq 
+start with 1
+increment by 1;
+---------------
+insert into branch 
+(branch_id,name,COURSE_ID,hod_name) values
+(branch_id_seq.nextval,'computer science engineering',1,'Dr.Sudha');
+
+insert into branch 
+(branch_id,name,COURSE_ID,hod_name) values
+(branch_id_seq.nextval,'electrical and electronics engineering',1,'Dr.Shanmugam');
+
+insert into branch 
+(branch_id,name,COURSE_ID,hod_name) values
+(branch_id_seq.nextval,'mechanical engineering',1,'Dr.Sri ram');
+
+insert into branch 
+(branch_id,name,COURSE_ID,hod_name) values
+(branch_id_seq.nextval,'aeronautical engineering',1,'Dr.Meenakshi');
+
+insert into branch 
+(branch_id,name,COURSE_ID,hod_name) values
+(branch_id_seq.nextval,'information technology',2,'Dr.Ram kumar');
+
+insert into branch 
+(branch_id,name,COURSE_ID,hod_name) values
+(branch_id_seq.nextval,'bio technology',2,'Dr.Prakash');
+
+insert into branch 
+(branch_id,name,COURSE_ID,hod_name) values
+(branch_id_seq.nextval,'physics',3,'Dr.Praveena');
+
+insert into branch 
+(branch_id,name,COURSE_ID,hod_name) values
+(branch_id_seq.nextval,'maths',3,'Dr.Sekar');
+
+insert into branch 
+(branch_id,name,COURSE_ID,hod_name) values
+(branch_id_seq.nextval,'chemistry',3,'Dr.Natarajan');
+
+insert into branch 
+(branch_id,name,COURSE_ID,hod_name) values
+(branch_id_seq.nextval,'tamil',4,'Dr.Ramya');
+
+insert into branch 
+(branch_id,name,COURSE_ID,hod_name) values
+(branch_id_seq.nextval,'english',4,'Dr.Prem kumar');
+
+insert into branch 
+(branch_id,name,COURSE_ID,hod_name) values
+(branch_id_seq.nextval,'history',4,'Dr.Kani mozhi');
+------------------
+create table trn_user_reg
+(
+user_id number(10) constraint user_id_pk primary key,
+name varchar2(50) not null,
+email varchar2(70) unique not null,
+password varchar(50) not null
+);
+-----------------------
+create sequence user_id_seq 
+start with 101
+increment by 1;
+---------------------
+create table trn_application
+(
+application_id number(10) constraint application_id_pk primary key,
+name varchar2(50) not null,
+father_name varchar2(50) not null,
+gender char(1) not null,
+date_of_birth date not null,
+phone_number number(10) unique not null,
+country varchar2(50) not null,
+state varchar2(50) not null,
+district varchar2(50) not null,
+school_name varchar2(50) not null,
+total_mark number(10) not null,
+course varchar2(50) not null,
+department varchar2(50) not null,
+branch varchar2(70) not null,
+type varchar2(30) not null,
+created_by number(10) not null,
+created_date TIMESTAMP not null,
+modified_by number(10) not null,
+modified_date TIMESTAMP not null
+);
+-----------------------
+CREATE SEQUENCE application_id_seq
+START WITH 1
+INCREMENT BY 1;
+--------------------------
+
+CREATE TABLE login
+(login_id NUMBER(10) NOT NULL,
+user_name VARCHAR2(60) UNIQUE NOT NULL,
+password VARCHAR2(20) NOT NULL);
+--------------
+CREATE SEQUENCE login_id_seq
+START WITH 1
+INCREMENT BY 1;
+-----------------------
+CREATE TABLE "HR"."MERIT" 
+   (	"MERIT_ID" NUMBER(10,0), 
+	"TOTAL_FEES" FLOAT(126), 
+	"BRANCH_ID" NUMBER(10,0)
+   );
+--------------------------
+   Insert into HR.MERIT (MERIT_ID,TOTAL_FEES,BRANCH_ID) values (1,40000,1);
+Insert into HR.MERIT (MERIT_ID,TOTAL_FEES,BRANCH_ID) values (2,30000,2);
+Insert into HR.MERIT (MERIT_ID,TOTAL_FEES,BRANCH_ID) values (3,50000,3);
+Insert into HR.MERIT (MERIT_ID,TOTAL_FEES,BRANCH_ID) values (4,35000,4);
+Insert into HR.MERIT (MERIT_ID,TOTAL_FEES,BRANCH_ID) values (5,40000,5);
+Insert into HR.MERIT (MERIT_ID,TOTAL_FEES,BRANCH_ID) values (6,25000,6);
+Insert into HR.MERIT (MERIT_ID,TOTAL_FEES,BRANCH_ID) values (7,20000,7);
+Insert into HR.MERIT (MERIT_ID,TOTAL_FEES,BRANCH_ID) values (8,20000,8);
+Insert into HR.MERIT (MERIT_ID,TOTAL_FEES,BRANCH_ID) values (9,22000,9);
+Insert into HR.MERIT (MERIT_ID,TOTAL_FEES,BRANCH_ID) values (10,10000,10);
+Insert into HR.MERIT (MERIT_ID,TOTAL_FEES,BRANCH_ID) values (11,10000,11);
+Insert into HR.MERIT (MERIT_ID,TOTAL_FEES,BRANCH_ID) values (12,10000,12);
+----------------------
+create table quotation
+(
+quotation_id number(5) constraint quatation_id_pk primary key,
+user_id number(5) not null,
+user_name varchar2(50) not null,
+course varchar2(50) not null,
+Department varchar2(50) not null,
+branch varchar2(50) not null,
+total_mark number(10)  not null,
+quote float not null
+);
+---------------------------
+create sequence quotation_id_seq
+start with 1
+increment by 1;
+---------------------------------
+create table trn_result
+(
+result_id number(10),
+user_id number(10)
+);
+-------------------------------------
+create sequence result_id_seqs
+start with 1
+increment by 1;
+------------------------Bank application---------------
+CREATE TABLE TRN_CUSTOMERS
+(
+ACCOUNT_NUMBER NUMBER(15) CONSTRAINT trn_customer_acnum_pk PRIMARY KEY,
+CUSTOMER_NAME VARCHAR(50) NOT NULL,
+CUSTOMER_ID NUMBER(10) UNIQUE NOT NULL,
+EMAIL VARCHAR2(60) UNIQUE NOT NULL,
+PHONE_NUMBER NUMBER(12) UNIQUE NOT NULL,
+FATHERS_NAME VARCHAR(50) NOT NULL,
+GENDER VARCHAR(7) NOT NULL,
+BALANCE NUMBER(12,2) DEFAULT 0,
+USERNAME VARCHAR2(30) UNIQUE NOT NULL,
+PASSWORD VARCHAR2(30) NOT NULL,
+DOB DATE NOT NULL,
+PERMANENT_ADDRESS VARCHAR2(250) NOT NULL,
+PERMANENT_CITY VARCHAR2(25) NOT NULL,
+CURRENT_ADDRESS VARCHAR2(250) NOT NULL,
+CURRENT_CITY VARCHAR2(25) NOT NULL,
+STATE VARCHAR(25) NOT NULL,
+IFSC_CODE VARCHAR2(10) NOT NULL,
+FLAG NUMBER(2) NOT NULL,
+CREATED_DATE TIMESTAMP NOT NULL,
+MODIFIED_DATE TIMESTAMP NOT NULL
+);
+-------------------------------------------
+insert into trn_customers (ACCOUNT_NUMBER,CUSTOMER_NAME,CUSTOMER_ID,EMAIL,PHONE_NUMBER,FATHERS_NAME,GENDER,BALANCE,USERNAME,PASSWORD,DOB,
+PERMANENT_ADDRESS,PERMANENT_CITY,CURRENT_ADDRESS,CURRENT_CITY,STATE,IFSC_CODE,FLAG,CREATED_DATE,MODIFIED_DATE)
+values(Trn_customers_acnum_seq02.nextval,'Athiselvam',Trn_customers_cusid_seq01.nextval,'athitek@rediffmail.com',9042401691,'Nainar',
+'Male',20000,'its773','pass123','11-05-1997','shanmugam street','shencottai','shanmugam street','shencottai','Tamil nadu','ATEK000134',
+1,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);
+select *from trn_customers;
+--------------------------------------------
+insert into trn_customers (ACCOUNT_NUMBER,CUSTOMER_NAME,CUSTOMER_ID,EMAIL,PHONE_NUMBER,FATHERS_NAME,GENDER,BALANCE,USERNAME,PASSWORD,DOB,
+PERMANENT_ADDRESS,PERMANENT_CITY,CURRENT_ADDRESS,CURRENT_CITY,STATE,IFSC_CODE,FLAG,CREATED_DATE,MODIFIED_DATE)
+values(Trn_customers_acnum_seq02.nextval,'Karthika',Trn_customers_cusid_seq01.nextval,'karthi@gmail.com',8883112512,'Nainar',
+'FeMale',200000,'its774','pass123','24-11-1997','shanmugam street','shencottai','shanmugam street','shencottai','Tamil nadu','ATEK000134',
+1,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);
+---------------------------------------------
+create table trn_payee(
+ACCOUNT_NUMBER NUMBER(15) not null,
+payee_NAME VARCHAR(50) NOT NULL,
+TRANSACTION_ID NUMBER(10),
+ifsc_code varchar(10) not null,
+mmid number(10) not null,
+remarks varchar2(100),
+BALANCE NUMBER(12,2),
+transaction_DATE TIMESTAMP NOT NULL
+);
+---------------------------------------------
+CREATE SEQUENCE Trn_payee_transid_seq01 START WITH 1430 INCREMENT BY 1;

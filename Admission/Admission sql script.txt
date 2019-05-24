@@ -1,0 +1,114 @@
+------------master table----------------
+create table course
+(
+course_id number(10) constraint course_id_pk primary key,
+name varchar2(50) not null
+);
+
+create sequence course_id_seq 
+start with 1
+increment by 1;
+
+------------------------------------------
+
+create table branch
+(
+branch_id number(10) branch_id_pk primary key,
+name varchar2(70) not null,
+course_id number(10) course_id_fk constraint foreign key references course(course_id)
+num_seats_merit number(10) not null,
+num_seats_management number(10) not null,
+);
+
+create sequence branch_id_seq 
+start with 1
+increment by 1;
+
+---------------------------------------------------
+
+create table departments 
+(
+dept_id number(10) constraint dept_id_pk primary key,
+name varchar2(70) not null,
+hod_name varchar2(50) not null,
+vision varchar2(200) not null,
+mission varchar2(200) not null,
+);
+
+create sequence dept_id_seq 
+start with 1
+increment by 1;
+
+---------------Transaction table--------------------------
+
+create table trn_user_reg
+(
+user_id number(10) constraint user_id_pk primary key,
+name varchar2(50) not null,
+email varchar2(70) unique not null,
+password varchar(50) not null
+);
+
+create sequence user_id_seq 
+start with 1
+increment by 1;
+
+-------------------------------------------------
+
+create table trn_application
+(
+application_id number(10) constraint application_id_pk primary key,
+name varchar2(50) not null,
+father_name varchar2(50) not null,
+gender char(1) not null,
+date_of_birth date not null,
+phone_number number(10) unique not null,
+country varchar2(50) not null,
+state varchar2(50) not null,
+district varchar2(50) not null,
+school_name varchar2(50) not null,
+total_mark number(10) not null,
+course varchar2(50) not null,
+branch varchar2(70) not null,
+type varchar2(30) not null,
+created_by number(10) not null,
+created_date TIMESTAMP not null,
+modified_by number(10) not null,
+modified_date TIMESTAMP not null,
+);
+
+create sequence application_id_seq 
+start with 1
+increment by 1;
+
+----------------------------------------------------
+
+create table trn_payment
+(
+payment_id number(10) constraint application_id_pk primary key,
+application_id number(10) application_id_fk constraint foreign key references trn_application(application_id),
+amount number(10) not null,
+created_by number(10),
+created_date TIMESTAMP,
+modified_by number(10),
+modified_date TIMESTAMP,
+);
+
+create sequence payment_id_seq 
+start with 1
+increment by 1;
+
+-----------------------------------------------------
+
+create table trn_result
+(
+result_id number(10) constraint result_id_pk primary key,
+application_id number(10) application_id_fk constraint foreign key references trn_application(application_id),
+result varchar2(20) not null
+);
+
+create sequence result_id_seq 
+start with 1
+increment by 1;
+
+------------------------------------------------------------
